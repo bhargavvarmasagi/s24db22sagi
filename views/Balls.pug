@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  - var results = [{ball_type:"Cricket Ball",cost:10,material:"Cork"},{ball_type:"Tennis Ball",cost:8,material:"Rubber"},{ball_type:"Football",cost:50,material:"Cowhide leather"}]
+
+  div(class="container-fluid")
+    div(class="row")
+      each f,index in results 
+        div(class="col-sm-2",onclick=`buy(${index})`) #{f.ball_type}, #{f.cost}, #{f.material}
+        script. 
+          function buy(index){
+            alert(`you purchased Item: ${index+1}`)
+          }
+        
+     
+

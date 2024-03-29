@@ -1,0 +1,31 @@
+extends layout
+ 
+block content
+  h1= title
+  p Number of rows #{query.rows}
+  p Number of columns #{query.cols}
+ 
+  - let rows=Number(query.rows)
+  - let cols=Number(query.cols)
+ 
+  if !(Number.isInteger(rows)) && !(Number.isInteger(cols))
+    p not an integer - error
+  else if (rows<3) && (rows>13)
+    p rows - out of range
+  else if (cols<3) && (cols>13)
+    p cols - out of range
+  else
+   table#outer
+     - for(let i=0; i<rows; i++){
+        tr#middle
+         - for(let j=0; j<cols; j++){
+            if(i==j)
+                td #{i+1}
+            else if (i<j)
+                td #{i+1}
+            else if (i >j)
+                td #{j+1}
+            else
+                td 0
+         -}
+     -}
