@@ -1,26 +1,26 @@
 var Balls = require('../models/Balls');
-// List of all Costumes
+// List of all Balls
 exports.balls_list = function(req, res) {
 res.send('NOT IMPLEMENTED: Balls list');
 };
-// for a specific Costume.
+// for a specific Ball.
 exports.balls_detail = function(req, res) {
 res.send('NOT IMPLEMENTED: Balls detail: ' + req.params.id);
 };
-// Handle Costume create on POST.
+// Handle Balls create on POST.
 exports.balls_create_post = function(req, res) {
 res.send('NOT IMPLEMENTED: Balls create POST');
 };
-// Handle Costume delete from on DELETE.
+// Handle Balls delete from on DELETE.
 exports.balls_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: Balls delete DELETE ' + req.params.id);
 };
-// Handle Costume update form on PUT.
+// Handle Balls update form on PUT.
 exports.balls_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: Balls update PUT' + req.params.id);
 };
 
-//List of all Costumes
+//List of all Balls
 exports.balls_list = async function(req, res) {
 try{
 theBalls = await Balls.find();
@@ -45,7 +45,7 @@ res.send(`{"error": ${err}}`);
 }
 };
 
-//Handle Costume create on POST.
+//Handle Balls create on POST.
 exports.balls_create_post = async function(req, res) {
 console.log(req.body)
 let document = new Balls();
@@ -66,7 +66,7 @@ res.send(`{"error": ${err}}`);
 }
 };
 
-//for a specific Costume.
+//for a specific Ball.
 exports.balls_detail = async function(req, res) {
 console.log("detail" + req.params.id)
 try {
@@ -79,7 +79,7 @@ res.send(`{"error": document for id ${req.params.id} not found`);
 };
 
 
-//Handle Costume update form on PUT.
+//Handle Balls update form on PUT.
 exports.balls_update_put = async function(req, res) {
 console.log(`update on id ${req.params.id} with body
 ${JSON.stringify(req.body)}`)
@@ -99,5 +99,33 @@ res.send(`{"error": ${err}: Update for id ${req.params.id}
 failed`);
 }
 };
+
+// Handle Balls delete on DELETE.
+exports.balls_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Balls.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
+
+//Handle a show one view with id specified by query
+exports.balls_view_one_Page = async function(req, res) {
+console.log("single view for id " + req.query.id)
+try{
+result = await Balls.findById( req.query.id)
+res.render('balldetail',
+{ title: 'Ball Detail', toShow: result });
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
+    
 
 

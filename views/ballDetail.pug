@@ -1,0 +1,20 @@
+extends layout
+block content
+h1= title
+- let _id = toShow._id
+- let ball_type = toShow.ball_type
+- let cost = toShow.cost
+- let material = toShow.material
+div
+div.row
+div(class='ballAttr mr-3') Ball ID is:
+div #{_id}
+div.row
+div(class='ballAttr mr-3') Ball Type is:
+div #{ball_type}
+div.row
+div(class='ballAttr mr-3') Ball Cost is:
+div #{cost}
+div.row
+div(class='ballAttr mr-3') Ball Material is:
+div #{material}
