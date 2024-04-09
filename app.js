@@ -16,6 +16,7 @@ require('dotenv').config();
 const connectionString = process.env.MONGO_CON
 mongoose = require('mongoose');
 mongoose.connect(connectionString);
+mongoose.set('strictQuery', false);
 
 //Get the default connection
 var db = mongoose.connection;
