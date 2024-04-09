@@ -12,8 +12,7 @@ var pickRouter = require('./routes/pick');
 var Balls = require('./models/Balls');
 var resourceRouter= require('./routes/resource');
 
-require('dotenv').config();
-const connectionString = process.env.MONGO_CON
+const connectionString = "mongodb+srv://bhargavsvs2001:govindrakodu14@cluster0.qa3ysaz.mongodb.net/"
 mongoose = require('mongoose');
 mongoose.connect(connectionString);
 mongoose.set('strictQuery', false);
