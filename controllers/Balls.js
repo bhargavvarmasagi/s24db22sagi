@@ -126,6 +126,51 @@ res.status(500)
 res.send(`{'error': '${err}'}`);
 }
 };
+
+//Handle building the view for creating a ball.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.balls_create_Page = function(req, res) {
+console.log("create view")
+try{
+res.render('ballcreate', { title: 'Ball Create'});
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
+
+//Handle building the view for updating a costume.
+// query provides the id
+exports.balls_update_Page = async function(req, res) {
+console.log("update view for item "+req.query.id)
+try{
+let result = await Balls.findById(req.query.id)
+res.render('ballupdate', { title: 'Ball Update', toShow: result });
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
+
+// Handle a delete one view with id from query
+exports.balls_delete_Page = async function(req, res) {
+console.log("Delete view for id " + req.query.id)
+try{
+result = await Balls.findById(req.query.id)
+res.render('balldelete', { title: 'Ball Delete', toShow:
+result });
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
+
+    
+
     
 
 
