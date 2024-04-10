@@ -11,3 +11,18 @@ a {
   background-color: aquamarine;
   width: 120px;
   }
+
+.ballAttr1{
+  background-color:aqua;
+  padding: 12px;
+  width:150px;
+  margin:3px;
+} 
+
+.ballVal{
+  padding:12px;
+  background-color: lightgrey;
+  margin: 3px;
+  width:210px;
+}
+

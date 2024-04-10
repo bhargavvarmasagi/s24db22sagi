@@ -1,58 +1,58 @@
 extends layout
+
 block content
   h1= title
+
   if (toShow == null)
     h2 No instance to delete
   else
-    - let _id = toShow._id
+    - let ballid = toShow._id
     - let ball_type = toShow.ball_type
     - let cost = toShow.cost
     - let material = toShow.material
-    - let actionid = "/resource/Balls/" + _id
-    script. 
+    - let actionid = "/resource/Balls/" + ballid
+    script.
       let scriptActionId = "#{actionid}"
 
     div
       div.row
-        div(class='ballAttr mr-3') Ball id is:
-        div #{_id}
+        div(class='ballAttr1 mr-4') Ball id is:
+        div(class='ballVal') #{ballid}
       div.row
-        div(class='ballAttr mr-3') Ball type is:
-        div #{ball_type}
+        div(class='ballAttr1 mr-4') Ball Type is:
+        div(class='ballVal') #{ball_type}
       div.row
-        div(class='ballAttr mr-3') Ball cost is:
-        div #{cost}
+        div(class='ballAttr1 mr-4') Ball cost is:
+        div(class='ballVal') #{cost}
       div.row
-        div(class='ballAttr mr-3') Ball material is:
-        div #{material}
-
-    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
-    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+        div(class='ballAttr1 mr-4') Ball material  is:
+        div(class='ballVal') #{material}
+    
+    button(class="btn btn-primary m-3" onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-3" onclick="cancel()") Cancel
 
     script.
+      // Function to navigate back to the home page for the costume collection
       function cancel() {
-      // Go back to the home page for the costume collection
-        window.location.href='/Balls'
+        window.location.href = '/Balls';
       }
 
       function deleteOnid() {
-        const confirmDelete = confirm("Are you sure you want to delete this ball?");
+        const confirmDelete = confirm("Are you sure you want to delete this Ball?");
         if (!confirmDelete) {
           return; // Cancel the delete operation
         }
-
-        console.log("starting delete")
-        // delete first
-        fetch(scriptActionid, {
-          method: 'DELETE' // Don't need a body for the delete
+        // Delete the costume
+        console.log("starting delete");
+        fetch(scriptActionId, {
+          method: 'DELETE'
         }).then((resp) => {
-          return resp.json(); // or resp.text() or whatever the server sends
+          return resp.json();
         }).then((body) => {
-          alert("Delete succeded")
-          window.location.href='/Balls'
-        // TODO handle body
+          alert("Delete succeeded");
+          window.location.href = '/Balls';
         }).catch((error) => {
-        // TODO handle error
-          alert("Delete failed " + error )
+          console.error("Delete failed", error);
+          alert("Delete failed: " + error);
         });
       }
