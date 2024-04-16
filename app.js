@@ -90,6 +90,14 @@ async function recreateDB(){
 
 var app = express();
 
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+  }));
+  app.use(passport.initialize());
+  app.use(passport.session());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -107,18 +115,12 @@ app.use('/grid',gridRouter);
 app.use('/pick', pickRouter);
 app.use('/resource',resourceRouter);
 
-app.use(require('express-session')({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false
-  }));
-  app.use(passport.initialize());
-  app.use(passport.session());
+
 
   // passport config
 // Use the existing connection
 // The Account model
-var Account =require('./models/account'));
+var Account =require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
