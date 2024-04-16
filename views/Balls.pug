@@ -10,6 +10,8 @@ block content
         - let destination = `dispatch(\"/Balls/update?id=${item._id}\")`
         div(class="row-sm-2",class="m-1") Ball is of #{item.ball_type} type, costs #{item.cost} $ and is made of #{item.material} material.
         button.btn( class="btn-primary ml-1", onclick= destination) Update
+        a(class="btn btn-primary" href=`/Balls/delete?id=${item._id}`) Delete
+        a(class="btn btn-secondary" href=`/Balls/detail?id=${item._id}`) Details
   script.
     function dispatch(path){
       window.location.href=path
